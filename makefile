@@ -69,11 +69,12 @@ envDetect: compileTools
 # compile tools
 #######################################
 include moveDmp.mk
-COMPILE_TOOLS_CMD=ant -f .$(D)scripts$(D)build_tools.xml -DTEST_JDK_HOME=$(TEST_JDK_HOME) -DTEST_ROOT=$(TEST_ROOT)
+COMPILE_TOOLS_CMD=ant -f .$(D)scripts$(D)build_tools.xml -verbose -DTEST_JDK_HOME=$(TEST_JDK_HOME) -DTEST_ROOT=$(TEST_ROOT)
 
 compileTools: 
 	$(RM) -r $(COMPILATION_OUTPUT); \
 	$(MKTREE) $(COMPILATION_OUTPUT); \
+	perl ${TEST_ROOT}/TKG/scripts/getDependencies.pl -path ${TEST_ROOT}/TKG/lib -task default -dependencyList json_simple; \
 	($(COMPILE_TOOLS_CMD) 2>&1; echo $$? ) | tee $(Q)$(COMPILATION_LOG)$(Q); \
 	$(MOVE_TDUMP)
 

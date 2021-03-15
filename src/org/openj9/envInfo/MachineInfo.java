@@ -141,7 +141,7 @@ public class MachineInfo {
 			System.out.println("Warning: "+ versionName + " information cannot be extracted.");
 			System.out.println(versionName + " output: " + actualVersionStr);
 		}
-		return isValid;
+		return true;
 	}
 
 	private void validateInfo() {
